@@ -37,9 +37,27 @@ def main():
         for j in range(4):
             mckinley.hour_passes()
 
-
+class Baby(object):
+    # Object is a Baby given a name
+    def __init__(self, name):
+        # Gives Baby a name
+        self.name = name
+        # Prints Hello baby (name of baby)
+        print ('Hello baby', self.name)
+        self.hours_passed =0
+    def feed_baby(self):
+        print('Thank you for feeding baby', self.name)
+        self.hours_passed = 0
+    def hour_passes(self):
+        if self.hours_passed == 0:
+            print('Baby', self.name, 'is sleeping.')
+        if self.hours_passed == 1:
+            print('Baby', self.name, 'is awake. Time for food.')
+        if self.hours_passed >= 2:
+            print('Baby', self.name, 'is CRYING uncontrollably! Feed the Baby!')
+        self.hours_passed = self.hours_passed + 1
 # ----------------------------------------------------------------------
-# TODO: 2. Implement a class called   Baby   that has a constructor and
+# DONE: 2. Implement a class called   Baby   that has a constructor and
 #   two methods, as described below.  Your finished Baby class should
 #   cause the code above to display the expected output.  Hint: Your
 #   class will need instance variables that you must figure out.
