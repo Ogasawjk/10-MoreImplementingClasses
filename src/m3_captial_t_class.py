@@ -19,10 +19,10 @@ def main():
     print('Un-comment the calls in MAIN one by one')
     print(' to run the testing code as you complete the TODOs.')
 
-    # run_test_simple_t()
-    # run_test_set_colors()
-    # run_test_move_by()
-    # run_test_clone()
+    #run_test_simple_t()
+    #run_test_set_colors()
+    #run_test_move_by()
+    run_test_clone()
 
 
 def run_test_simple_t():
@@ -112,6 +112,14 @@ class CapitalT(object):
     """
 
     def __init__(self, intersection_center, width, height, letter_thickness):
+
+        self.h_rect = rg.Rectangle(rg.Point(intersection_center.x - (width / 2), intersection_center.y -
+                                           (letter_thickness / 2)),
+                                  rg. Point(intersection_center.x + (width / 2), intersection_center.y + (letter_thickness / 2)))
+        self.v_rect = rg.Rectangle(rg.Point(intersection_center.x - (letter_thickness / 2), intersection_center.y
+                                           - (letter_thickness / 2)), rg.Point(intersection_center.x +
+                                                                               (letter_thickness / 2), intersection_center.y
+                                                                               - (letter_thickness / 2) + height))
         """
         What comes in:
            -- self
@@ -146,12 +154,11 @@ class CapitalT(object):
           :type letter_thickness:   int
         """
         # --------------------------------------------------------------
-        # TODO: 3.
+        # DONE: 3.
         #   READ the above specification, including the Example.
         #   Implement this method
         #   Note: you will need to also implement attach_to before testing
         # --------------------------------------------------------------
-
     def attach_to(self, window):
         """
         What comes in:
@@ -170,13 +177,14 @@ class CapitalT(object):
         Type hints:
           :type window: rg.RoseWindow
         """
+        self.v_rect.attach_to(window)
+        self.h_rect.attach_to(window)
         # --------------------------------------------------------------
-        # TODO: 4.
+        # DONE: 4.
         #   READ the above specification, including the Example.
         #   Implement and test this method by looking at the console and
         #     the graphics window (compare it to simple_t.pdf)
         # --------------------------------------------------------------
-
     def set_colors(self, fill_color, outline_color):
         """
         What comes in:
@@ -197,8 +205,12 @@ class CapitalT(object):
           :type fill_color: str
           :type outline_color: str
         """
+        self.h_rect.fill_color = fill_color
+        self.v_rect.fill_color = fill_color
+        self.h_rect.outline_color = outline_color
+        self.v_rect.outline_color = outline_color
         # --------------------------------------------------------------
-        # TODO: 5.
+        # DONE: 5.
         #   READ the above specification, including the Example.
         #   Implement and test this method by uncommenting the appropriate
         #     run_test method in main. Compare the graphics window to
@@ -227,15 +239,23 @@ class CapitalT(object):
           :type dx: int
           :type dy: int
         """
+        self.h_rect.corner_1.x += dx
+        self.h_rect.corner_1.y += dy
+        self.h_rect.corner_2.x += dx
+        self.h_rect.corner_2.y += dy
+
+        self.v_rect.corner_1.x += dx
+        self.v_rect.corner_1.y += dy
+        self.v_rect.corner_2.x += dx
+        self.v_rect.corner_2.y += dy
         # --------------------------------------------------------------
-        # TODO: 6.
+        # DONE: 6.
         #   READ the above specification, including the Example.
         #   Implement and test this method by uncommenting the appropriate
         #     run_test method in main. Compare the graphics window to
         #     move_by.pdf. Note: the pdf shows the different locations
         #     that the T moves through, but there is only 1 T at any moment.
         # --------------------------------------------------------------
-
     def clone(self):
         """
         What comes in:
@@ -255,15 +275,16 @@ class CapitalT(object):
         Type hints:
           :rtype: CapitalT
         """
+        clone_T = CapitalT(self.h_rect.get_center(), self.h_rect.get_width(),self.v_rect.get_height(), self.h_rect.get_height())
+        clone_T.set_colors(self.h_rect.fill_color, self.h_rect.outline_color)
+        return clone_T
         # --------------------------------------------------------------
-        # TODO: 7.
+        # DONE: 7.
         #   READ the above specification, including the Example.
         #   Implement and test this method by uncommenting the appropriate
         #     run_test method in main. Compare the graphics window to
         #     clone.pdf.
         # --------------------------------------------------------------
-
-
 # ----------------------------------------------------------------------
 # If this module is running at the top level (as opposed to being
 # imported by another module), then call the 'main' function.
